@@ -46,6 +46,23 @@ class GeminiService {
 
   GenerativeModel _model() => GenerativeModel(model: _modelName, apiKey: _apiKey);
 
+  /// Gemini's free tier occasionally returns a transient 503 "high demand"
+  /// error. Retrying a couple of times with a short delay resolves this in
+  /// most cases without the user needing to manually retry.
+  Future<GenerateContentResponse> _generateWithRetry(String prompt) async {
+    const maxAttempts = 3;
+    for (var attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        return await _model().generateContent([Content.text(prompt)]);
+      } on ServerException catch (e) {
+        debugPrint('Gemini server error (attempt $attempt/$maxAttempts): $e');
+        if (attempt == maxAttempts) rethrow;
+        await Future.delayed(Duration(seconds: attempt * 2));
+      }
+    }
+    throw StateError('unreachable');
+  }
+
   /// Step 1: ask Gemini to turn the free-form question into a few short
   /// search keywords, since the Quran/Hadith sources only support literal
   /// keyword search, not semantic search.
@@ -58,7 +75,7 @@ commas and nothing else - no numbering, no explanation.
 
 Question: $question
 ''';
-    final response = await _model().generateContent([Content.text(prompt)]);
+    final response = await _generateWithRetry(prompt);
     final raw = response.text?.trim() ?? '';
     if (raw.isEmpty) return [question];
     return raw
@@ -105,7 +122,7 @@ Question: $question
       hasSources: hasSources,
     );
 
-    final response = await _model().generateContent([Content.text(prompt)]);
+    final response = await _generateWithRetry(prompt);
     final text = response.text?.trim() ?? '';
 
     return ChatbotAnswer(text: text, hasSources: hasSources);
