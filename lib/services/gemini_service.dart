@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 import '../models/hadith_result.dart';
@@ -79,14 +80,17 @@ Question: $question
         quranResults.addAll(
           await _quranService.search(keyword, language: languageCode, limit: 3),
         );
-      } catch (_) {
+      } catch (e) {
         // A single failed lookup shouldn't abort the whole answer.
+        debugPrint('Quran lookup failed for "$keyword": $e');
       }
       try {
         if (_hadithService.isConfigured) {
           hadithResults.addAll(await _hadithService.search(keyword, limit: 3));
         }
-      } catch (_) {}
+      } catch (e) {
+        debugPrint('Hadith lookup failed for "$keyword": $e');
+      }
       if (quranResults.length >= 5 && hadithResults.length >= 5) break;
     }
 

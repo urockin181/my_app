@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,9 +67,13 @@ class AthkarService {
     final uri = Uri.parse('$_base/$langPath/$chapter.json');
     try {
       final response = await http.get(uri).timeout(const Duration(seconds: 10));
-      if (response.statusCode != 200) return null;
+      if (response.statusCode != 200) {
+        debugPrint('Athkar fetch $uri returned HTTP ${response.statusCode}');
+        return null;
+      }
       return jsonDecode(response.body) as Map<String, dynamic>;
-    } catch (_) {
+    } catch (e) {
+      debugPrint('Athkar fetch $uri failed: $e');
       return null;
     }
   }

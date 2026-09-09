@@ -82,7 +82,8 @@ class _ChatScreenState extends State<ChatScreen> {
       setState(() {
         _messages.add(ChatMessage(sender: ChatSender.assistant, text: text));
       });
-    } catch (_) {
+    } catch (e, stackTrace) {
+      debugPrint('Chat error: $e\n$stackTrace');
       setState(() {
         _messages.add(ChatMessage(
           sender: ChatSender.assistant,
