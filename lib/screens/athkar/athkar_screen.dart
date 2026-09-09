@@ -65,17 +65,23 @@ class _AthkarList extends StatefulWidget {
 }
 
 class _AthkarListState extends State<_AthkarList> {
-  late Future<List<AthkarItem>> _future;
+  Future<List<AthkarItem>>? _future;
+  String? _loadedLanguage;
 
   @override
-  void initState() {
-    super.initState();
-    _load();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final languageCode = Localizations.localeOf(context).languageCode;
+    if (_loadedLanguage != languageCode) {
+      _loadedLanguage = languageCode;
+      _load(languageCode);
+    }
   }
 
-  void _load() {
-    final languageCode = Localizations.localeOf(context).languageCode;
-    _future = widget.service.fetch(widget.target, languageCode: languageCode);
+  void _load(String languageCode) {
+    setState(() {
+      _future = widget.service.fetch(widget.target, languageCode: languageCode);
+    });
   }
 
   @override
@@ -109,7 +115,7 @@ class _AthkarListState extends State<_AthkarList> {
                   Text(l10n.athkarError, textAlign: TextAlign.center),
                   const SizedBox(height: 20),
                   FilledButton(
-                    onPressed: () => setState(_load),
+                    onPressed: () => _load(_loadedLanguage!),
                     child: Text(l10n.athkarRetry),
                   ),
                 ],
