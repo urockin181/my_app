@@ -1,0 +1,80 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Muslim Guide",
+  "@appTitle": {"description": "The app name shown in the title bar and app switcher"},
+
+  "navChat": "Chat",
+  "navPrayerTimes": "Prayer Times",
+  "navQibla": "Qibla",
+  "navAthkar": "Athkar",
+
+  "chatTitle": "Ask a Question",
+  "chatInputHint": "Ask about Quran or Hadith...",
+  "chatSend": "Send",
+  "chatDisclaimer": "Answers are drawn from the Quran and Hadith. For important religious rulings, please also consult a qualified scholar.",
+  "chatWelcomeMessage": "Assalamu Alaikum! Ask me any question and I will search the Quran and Hadith for an answer.",
+  "chatNoInformation": "I could not find information about this in the Quran or Hadith sources available to me. Please consult a qualified scholar.",
+  "chatSearching": "Searching the Quran and Hadith...",
+  "chatErrorGeneric": "Something went wrong while getting an answer. Please try again.",
+  "chatSourceQuran": "Quran",
+  "chatSourceHadith": "Hadith",
+  "chatHadithGradeSahih": "Authentic (Sahih)",
+  "chatHadithGradeHasan": "Good (Hasan)",
+  "chatHadithGradeDaif": "Weak (Da'if)",
+  "chatHadithGradeUnknown": "Grade not available",
+  "chatApiKeyMissing": "The chatbot is not configured yet. Please add a Gemini API key to use this feature.",
+
+  "prayerTimesTitle": "Prayer Times",
+  "prayerFajr": "Fajr",
+  "prayerSunrise": "Sunrise",
+  "prayerDhuhr": "Dhuhr",
+  "prayerAsr": "Asr",
+  "prayerMaghrib": "Maghrib",
+  "prayerIsha": "Isha",
+  "prayerNextPrayer": "Next prayer: {name} at {time}",
+  "@prayerNextPrayer": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "time": {"type": "String"}
+    }
+  },
+  "prayerLocationRequired": "Location access is needed to calculate accurate prayer times for your area.",
+  "prayerGrantPermission": "Grant Location Access",
+  "prayerLocationDenied": "Location permission was denied. Prayer times cannot be calculated without your location.",
+  "prayerLocationServiceOff": "Location services are turned off. Please enable them to get prayer times.",
+  "prayerLoading": "Getting your location...",
+  "prayerRefresh": "Refresh",
+
+  "qiblaTitle": "Qibla Direction",
+  "qiblaInstructions": "Hold your phone flat and rotate until the arrow points toward the Kaaba.",
+  "qiblaCalibrate": "If the direction seems off, move your phone in a figure-8 motion to calibrate the compass.",
+  "qiblaLocationRequired": "Location access is needed to determine the Qibla direction from where you are.",
+  "qiblaNotSupported": "Your device does not have a compass sensor, so Qibla direction cannot be shown.",
+  "qiblaDegrees": "{degrees}° from North",
+  "@qiblaDegrees": {
+    "placeholders": {
+      "degrees": {"type": "String"}
+    }
+  },
+
+  "athkarTitle": "Athkar",
+  "athkarSabah": "Morning Athkar",
+  "athkarMasaa": "Evening Athkar",
+  "athkarCount": "Count: {count}",
+  "@athkarCount": {
+    "placeholders": {
+      "count": {"type": "String"}
+    }
+  },
+  "athkarReset": "Reset",
+  "athkarCompleted": "Completed",
+  "athkarLoading": "Loading Athkar...",
+  "athkarError": "Could not load Athkar. Please check your internet connection and try again.",
+  "athkarRetry": "Retry",
+
+  "settingsTitle": "Settings",
+  "settingsLanguage": "Language",
+  "settingsLanguageArabic": "العربية",
+  "settingsLanguageEnglish": "English"
+}
