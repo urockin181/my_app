@@ -73,33 +73,55 @@ class GeminiService {
     throw StateError('unreachable');
   }
 
-  /// Step 1: ask Gemini to turn the free-form question into a few short
-  /// search keywords, since the Quran/Hadith sources only support literal
-  /// keyword search, not semantic search.
-  Future<List<String>> _extractKeywords(String question, String languageName) async {
-    final prompt = '''
-Extract 1 to 3 short search keywords (single words or very short phrases,
-in $languageName) that would help find relevant Quran verses or Hadith
-about the following question. Reply with ONLY the keywords separated by
-commas and nothing else - no numbering, no explanation.
+  static const _stopWordsEn = {
+    'the', 'a', 'an', 'is', 'are', 'was', 'were', 'be', 'been', 'of', 'in',
+    'on', 'at', 'to', 'for', 'with', 'about', 'what', 'whats', 'how', 'why',
+    'who', 'does', 'do', 'did', 'has', 'have', 'had', 'and', 'or', 'but',
+    'not', 'no', 'this', 'that', 'these', 'those', 'i', 'you', 'he', 'she',
+    'it', 'we', 'they', 'my', 'your', 'his', 'her', 'its', 'our', 'their',
+    'please', 'tell', 'me', 'can', 'ruling', 'islam', 'muslim',
+  };
 
-Question: $question
-''';
-    final response = await _generateWithRetry(prompt);
-    final raw = response.text?.trim() ?? '';
-    if (raw.isEmpty) return [question];
-    return raw
-        .split(',')
-        .map((k) => k.trim())
-        .where((k) => k.isNotEmpty)
-        .take(3)
+  static const _stopWordsAr = {
+    'في', 'من', 'على', 'إلى', 'ما', 'هل', 'كيف', 'لماذا', 'هذا', 'هذه',
+    'ذلك', 'تلك', 'و', 'أو', 'لا', 'نعم', 'عن', 'انا', 'أنا', 'هو', 'هي',
+    'انت', 'أنت', 'يا', 'اذا', 'إذا', 'قد', 'كان', 'يكون',
+  };
+
+  /// Turns the free-form question into a few short search keywords, since
+  /// the Quran/Hadith sources only support literal keyword search, not
+  /// semantic search. Done locally with simple stop-word removal rather
+  /// than a Gemini call, since Gemini's free tier has a tight daily request
+  /// quota and this app already uses one Gemini call per question for the
+  /// final answer - a second call per question would burn through that
+  /// quota roughly twice as fast for little benefit here.
+  List<String> _extractKeywords(String question, String languageCode) {
+    final stopWords = languageCode == 'ar' ? _stopWordsAr : _stopWordsEn;
+    final cleaned = question.replaceAll(RegExp(r'[؟?!.,؛;:]'), ' ');
+    final words = cleaned
+        .split(RegExp(r'\s+'))
+        .map((w) => w.trim())
+        .where((w) => w.isNotEmpty)
+        .where((w) => !stopWords.contains(w.toLowerCase()))
         .toList();
+
+    if (words.isEmpty) return [question];
+
+    // A couple of 2-word phrases (adjacent significant words) tend to match
+    // better than single words for topical searches, plus the single most
+    // distinctive (longest) word as a fallback.
+    final keywords = <String>[];
+    if (words.length >= 2) keywords.add('${words[0]} ${words[1]}');
+    keywords.add(words.reduce((a, b) => a.length >= b.length ? a : b));
+    if (words.length > 2) keywords.add(words.last);
+
+    return keywords.toSet().take(3).toList();
   }
 
   Future<ChatbotAnswer> answer(String question, {required String languageCode}) async {
     final languageName = languageCode == 'ar' ? 'Arabic' : 'English';
 
-    final keywords = await _extractKeywords(question, languageName);
+    final keywords = _extractKeywords(question, languageCode);
 
     final quranResults = <QuranVerse>[];
     final hadithResults = <HadithResult>[];
