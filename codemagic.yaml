@@ -1,0 +1,37 @@
+workflows:
+  ios-testflight:
+    name: iOS TestFlight
+    max_build_duration: 60
+    integrations:
+      app_store_connect: codemagic
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.example.myApp
+      vars:
+        # Set GEMINI_API_KEY and HADITH_API_KEY as Secure environment
+        # variables in Codemagic's app settings (Environment variables tab)
+        # - do not put real keys in this file.
+        XCODE_WORKSPACE: "ios/Runner.xcworkspace"
+        XCODE_SCHEME: "Runner"
+      flutter: stable
+    scripts:
+      - name: Set up code signing
+        script: |
+          xcode-project use-profiles
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Build iOS (.ipa)
+        script: |
+          flutter build ipa --release \
+            --dart-define=GEMINI_API_KEY=$GEMINI_API_KEY \
+            --dart-define=HADITH_API_KEY=$HADITH_API_KEY \
+            --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
