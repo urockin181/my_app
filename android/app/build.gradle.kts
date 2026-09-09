@@ -6,7 +6,11 @@ plugins {
 
 android {
     namespace = "com.example.my_app"
-    compileSdk = flutter.compileSdkVersion
+    // Pinned rather than left as flutter.compileSdkVersion: some of this
+    // app's plugins (flutter_compass_v2's androidx dependencies) require
+    // compiling against API 34+, which is higher than what some Flutter
+    // releases default to.
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
