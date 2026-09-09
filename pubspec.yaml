@@ -31,8 +31,9 @@ dependencies:
   # Prayer time calculation (local, no API needed)
   adhan_dart: ^2.0.1
 
-  # Compass sensor for Qibla direction
-  flutter_qiblah: ^3.0.0
+  # Compass sensor for Qibla direction (bearing itself is computed with
+  # adhan_dart's pure-Dart Qibla.qibla() - no native code, no build issues)
+  flutter_compass_v2: ^1.0.3
 
   # Gemini free-tier LLM for the chatbot's natural language layer
   google_generative_ai: ^0.4.6
