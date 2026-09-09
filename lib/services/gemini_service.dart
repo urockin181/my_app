@@ -22,10 +22,11 @@ class ChatbotAnswer {
 /// retrieved text. Gemini is never asked to answer from its own general
 /// knowledge of Islam - only from the sources handed to it in the prompt.
 ///
-/// Model name: 'gemini-2.0-flash' is used by default because it is on
-/// Google AI Studio's free tier. If Google renames/retires this model,
-/// update [_modelName] to whatever free Flash model is currently listed at
-/// https://ai.google.dev/gemini-api/docs/models.
+/// Model name: 'gemini-3.6-flash' - the free-tier Flash model Google's own
+/// API currently points to (gemini-2.0-flash was retired). If this model is
+/// later renamed/retired too, the API error message names the current
+/// replacement directly - update [_modelName] to match, or check
+/// https://ai.google.dev/gemini-api/docs/models for the current free tier.
 class GeminiService {
   GeminiService({
     required String apiKey,
@@ -35,7 +36,7 @@ class GeminiService {
         _quranService = quranService,
         _hadithService = hadithService;
 
-  static const _modelName = 'gemini-2.0-flash';
+  static const _modelName = 'gemini-3.6-flash';
 
   final String _apiKey;
   final QuranService _quranService;
