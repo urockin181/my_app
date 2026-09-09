@@ -117,8 +117,26 @@ class _Message extends StatelessWidget {
   }
 }
 
-class _QiblaCompass extends StatelessWidget {
+class _QiblaCompass extends StatefulWidget {
   const _QiblaCompass();
+
+  @override
+  State<_QiblaCompass> createState() => _QiblaCompassState();
+}
+
+class _QiblaCompassState extends State<_QiblaCompass> {
+  late Stream<QiblahDirection> _stream = _createStream();
+
+  Stream<QiblahDirection> _createStream() {
+    return FlutterQiblah.qiblahStream.timeout(
+      const Duration(seconds: 10),
+      onTimeout: (sink) => sink.addError(TimeoutException('No compass data received')),
+    );
+  }
+
+  void _retry() {
+    setState(() => _stream = _createStream());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,8 +157,16 @@ class _QiblaCompass extends StatelessWidget {
           Expanded(
             child: Center(
               child: StreamBuilder<QiblahDirection>(
-                stream: FlutterQiblah.qiblahStream,
+                stream: _stream,
                 builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return _Message(
+                      icon: Icons.explore_off,
+                      text: l10n.qiblaNotSupported,
+                      actionLabel: l10n.prayerRefresh,
+                      onAction: _retry,
+                    );
+                  }
                   if (!snapshot.hasData) {
                     return const CircularProgressIndicator();
                   }

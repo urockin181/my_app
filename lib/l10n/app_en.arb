@@ -76,5 +76,23 @@
   "settingsTitle": "Settings",
   "settingsLanguage": "Language",
   "settingsLanguageArabic": "العربية",
-  "settingsLanguageEnglish": "English"
+  "settingsLanguageEnglish": "English",
+  "settingsTheme": "Appearance",
+  "settingsThemeLight": "Light",
+  "settingsThemeDark": "Dark",
+  "settingsThemeSystem": "System",
+  "settingsPrayerCalculation": "Prayer Calculation",
+  "settingsCalculationMethod": "Calculation method",
+  "settingsMadhab": "Asr calculation (Madhab)",
+  "settingsMadhabShafi": "Shafi / Maliki / Hanbali",
+  "settingsMadhabHanafi": "Hanafi",
+
+  "onboardingChooseLanguageTitle": "Choose your language",
+  "onboardingChooseLanguageSubtitle": "اختر لغتك",
+  "onboardingNext": "Next",
+  "onboardingPermissionTitle": "Enable Location",
+  "onboardingPermissionBody": "Muslim Guide uses your location to show accurate prayer times and point you toward the Qibla. You can change this later in your device settings.",
+  "onboardingAllowLocation": "Allow Location Access",
+  "onboardingSkip": "Not Now",
+  "onboardingGetStarted": "Get Started"
 }

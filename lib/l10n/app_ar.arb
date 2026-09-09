@@ -75,5 +75,23 @@
   "settingsTitle": "الإعدادات",
   "settingsLanguage": "اللغة",
   "settingsLanguageArabic": "العربية",
-  "settingsLanguageEnglish": "English"
+  "settingsLanguageEnglish": "English",
+  "settingsTheme": "المظهر",
+  "settingsThemeLight": "فاتح",
+  "settingsThemeDark": "داكن",
+  "settingsThemeSystem": "تلقائي حسب النظام",
+  "settingsPrayerCalculation": "حساب مواقيت الصلاة",
+  "settingsCalculationMethod": "طريقة الحساب",
+  "settingsMadhab": "حساب العصر (المذهب)",
+  "settingsMadhabShafi": "الشافعي / المالكي / الحنبلي",
+  "settingsMadhabHanafi": "الحنفي",
+
+  "onboardingChooseLanguageTitle": "اختر لغتك",
+  "onboardingChooseLanguageSubtitle": "Choose your language",
+  "onboardingNext": "التالي",
+  "onboardingPermissionTitle": "تفعيل الموقع",
+  "onboardingPermissionBody": "يستخدم دليل المسلم موقعك لعرض مواقيت صلاة دقيقة وتحديد اتجاه القبلة. يمكنك تغيير ذلك لاحقاً من إعدادات جهازك.",
+  "onboardingAllowLocation": "السماح بالوصول للموقع",
+  "onboardingSkip": "ليس الآن",
+  "onboardingGetStarted": "ابدأ الآن"
 }

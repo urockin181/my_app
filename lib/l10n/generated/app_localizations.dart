@@ -415,6 +415,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'English'**
   String get settingsLanguageEnglish;
+
+  /// No description provided for @settingsTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsTheme;
+
+  /// No description provided for @settingsThemeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsThemeLight;
+
+  /// No description provided for @settingsThemeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settingsThemeDark;
+
+  /// No description provided for @settingsThemeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsThemeSystem;
+
+  /// No description provided for @settingsPrayerCalculation.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer Calculation'**
+  String get settingsPrayerCalculation;
+
+  /// No description provided for @settingsCalculationMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculation method'**
+  String get settingsCalculationMethod;
+
+  /// No description provided for @settingsMadhab.
+  ///
+  /// In en, this message translates to:
+  /// **'Asr calculation (Madhab)'**
+  String get settingsMadhab;
+
+  /// No description provided for @settingsMadhabShafi.
+  ///
+  /// In en, this message translates to:
+  /// **'Shafi / Maliki / Hanbali'**
+  String get settingsMadhabShafi;
+
+  /// No description provided for @settingsMadhabHanafi.
+  ///
+  /// In en, this message translates to:
+  /// **'Hanafi'**
+  String get settingsMadhabHanafi;
+
+  /// No description provided for @onboardingChooseLanguageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your language'**
+  String get onboardingChooseLanguageTitle;
+
+  /// No description provided for @onboardingChooseLanguageSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'اختر لغتك'**
+  String get onboardingChooseLanguageSubtitle;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingPermissionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Location'**
+  String get onboardingPermissionTitle;
+
+  /// No description provided for @onboardingPermissionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Muslim Guide uses your location to show accurate prayer times and point you toward the Qibla. You can change this later in your device settings.'**
+  String get onboardingPermissionBody;
+
+  /// No description provided for @onboardingAllowLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow Location Access'**
+  String get onboardingAllowLocation;
+
+  /// No description provided for @onboardingSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Now'**
+  String get onboardingSkip;
+
+  /// No description provided for @onboardingGetStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get onboardingGetStarted;
 }
 
 class _AppLocalizationsDelegate

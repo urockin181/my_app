@@ -186,4 +186,56 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsLanguageEnglish => 'English';
+
+  @override
+  String get settingsTheme => 'Appearance';
+
+  @override
+  String get settingsThemeLight => 'Light';
+
+  @override
+  String get settingsThemeDark => 'Dark';
+
+  @override
+  String get settingsThemeSystem => 'System';
+
+  @override
+  String get settingsPrayerCalculation => 'Prayer Calculation';
+
+  @override
+  String get settingsCalculationMethod => 'Calculation method';
+
+  @override
+  String get settingsMadhab => 'Asr calculation (Madhab)';
+
+  @override
+  String get settingsMadhabShafi => 'Shafi / Maliki / Hanbali';
+
+  @override
+  String get settingsMadhabHanafi => 'Hanafi';
+
+  @override
+  String get onboardingChooseLanguageTitle => 'Choose your language';
+
+  @override
+  String get onboardingChooseLanguageSubtitle => 'اختر لغتك';
+
+  @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingPermissionTitle => 'Enable Location';
+
+  @override
+  String get onboardingPermissionBody =>
+      'Muslim Guide uses your location to show accurate prayer times and point you toward the Qibla. You can change this later in your device settings.';
+
+  @override
+  String get onboardingAllowLocation => 'Allow Location Access';
+
+  @override
+  String get onboardingSkip => 'Not Now';
+
+  @override
+  String get onboardingGetStarted => 'Get Started';
 }

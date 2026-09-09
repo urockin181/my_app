@@ -2,16 +2,20 @@ import 'dart:async';
 
 import 'package:adhan_dart/adhan_dart.dart' as adhan;
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
 import '../../l10n/generated/app_localizations.dart';
 import '../../services/location_service.dart';
 import '../../services/prayer_times_service.dart';
+import '../../state/prayer_settings_controller.dart';
 
 enum _ScreenState { loading, needsPermission, serviceDisabled, denied, ready, error }
 
 class PrayerTimesScreen extends StatefulWidget {
-  const PrayerTimesScreen({super.key});
+  const PrayerTimesScreen({super.key, required this.settingsController});
+
+  final PrayerSettingsController settingsController;
 
   @override
   State<PrayerTimesScreen> createState() => _PrayerTimesScreenState();
@@ -22,6 +26,7 @@ class _PrayerTimesScreenState extends State<PrayerTimesScreen> {
   final _prayerTimesService = PrayerTimesService();
 
   _ScreenState _state = _ScreenState.loading;
+  Position? _position;
   adhan.PrayerTimes? _prayerTimes;
   Timer? _ticker;
 
@@ -29,6 +34,7 @@ class _PrayerTimesScreenState extends State<PrayerTimesScreen> {
   void initState() {
     super.initState();
     _load();
+    widget.settingsController.addListener(_recompute);
     _ticker = Timer.periodic(const Duration(seconds: 30), (_) {
       if (mounted) setState(() {});
     });
@@ -36,8 +42,21 @@ class _PrayerTimesScreenState extends State<PrayerTimesScreen> {
 
   @override
   void dispose() {
+    widget.settingsController.removeListener(_recompute);
     _ticker?.cancel();
     super.dispose();
+  }
+
+  void _recompute() {
+    final position = _position;
+    if (position == null) return;
+    setState(() {
+      _prayerTimes = _prayerTimesService.calculateForToday(
+        latitude: position.latitude,
+        longitude: position.longitude,
+        calculationParameters: widget.settingsController.buildParameters(),
+      );
+    });
   }
 
   Future<void> _load() async {
@@ -56,8 +75,10 @@ class _PrayerTimesScreenState extends State<PrayerTimesScreen> {
           final times = _prayerTimesService.calculateForToday(
             latitude: position.latitude,
             longitude: position.longitude,
+            calculationParameters: widget.settingsController.buildParameters(),
           );
           setState(() {
+            _position = position;
             _prayerTimes = times;
             _state = _ScreenState.ready;
           });

@@ -6,13 +6,13 @@ class PrayerTimesService {
   PrayerTimes calculateForToday({
     required double latitude,
     required double longitude,
+    required CalculationParameters calculationParameters,
   }) {
     final coordinates = Coordinates(latitude, longitude);
-    final params = CalculationMethodParameters.muslimWorldLeague();
     return PrayerTimes(
       coordinates: coordinates,
       date: DateTime.now(),
-      calculationParameters: params,
+      calculationParameters: calculationParameters,
       precision: true,
     );
   }

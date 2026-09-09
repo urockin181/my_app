@@ -2,17 +2,27 @@ import 'package:flutter/material.dart';
 
 import '../l10n/generated/app_localizations.dart';
 import '../state/locale_controller.dart';
+import '../state/prayer_settings_controller.dart';
+import '../state/theme_controller.dart';
 import 'athkar/athkar_screen.dart';
 import 'chat/chat_screen.dart';
 import 'prayer_times/prayer_times_screen.dart';
 import 'qibla/qibla_screen.dart';
+import 'settings/settings_sheet.dart';
 
 /// Root scaffold: one shared app bar + bottom navigation across the app's
 /// four main sections. The chatbot is the first tab, i.e. the app's home.
 class HomeShell extends StatefulWidget {
-  const HomeShell({super.key, required this.localeController});
+  const HomeShell({
+    super.key,
+    required this.localeController,
+    required this.themeController,
+    required this.prayerSettingsController,
+  });
 
   final LocaleController localeController;
+  final ThemeController themeController;
+  final PrayerSettingsController prayerSettingsController;
 
   @override
   State<HomeShell> createState() => _HomeShellState();
@@ -39,31 +49,26 @@ class _HomeShellState extends State<HomeShell> {
       l10n.athkarTitle,
     ];
 
-    final screens = const [
-      ChatScreen(),
-      PrayerTimesScreen(),
-      QiblaScreen(),
-      AthkarScreen(),
+    final screens = [
+      const ChatScreen(),
+      PrayerTimesScreen(settingsController: widget.prayerSettingsController),
+      const QiblaScreen(),
+      const AthkarScreen(),
     ];
 
     return Scaffold(
       appBar: AppBar(
         title: Text(titles[_index]),
         actions: [
-          PopupMenuButton<Locale>(
-            icon: const Icon(Icons.language),
-            tooltip: l10n.settingsLanguage,
-            onSelected: widget.localeController.setLocale,
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                value: const Locale('ar'),
-                child: Text(l10n.settingsLanguageArabic),
-              ),
-              PopupMenuItem(
-                value: const Locale('en'),
-                child: Text(l10n.settingsLanguageEnglish),
-              ),
-            ],
+          IconButton(
+            icon: const Icon(Icons.settings_outlined),
+            tooltip: l10n.settingsTitle,
+            onPressed: () => showSettingsSheet(
+              context,
+              localeController: widget.localeController,
+              themeController: widget.themeController,
+              prayerSettingsController: widget.prayerSettingsController,
+            ),
           ),
         ],
       ),

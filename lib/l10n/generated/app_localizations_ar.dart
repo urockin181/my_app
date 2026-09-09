@@ -186,4 +186,56 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get settingsLanguageEnglish => 'English';
+
+  @override
+  String get settingsTheme => 'المظهر';
+
+  @override
+  String get settingsThemeLight => 'فاتح';
+
+  @override
+  String get settingsThemeDark => 'داكن';
+
+  @override
+  String get settingsThemeSystem => 'تلقائي حسب النظام';
+
+  @override
+  String get settingsPrayerCalculation => 'حساب مواقيت الصلاة';
+
+  @override
+  String get settingsCalculationMethod => 'طريقة الحساب';
+
+  @override
+  String get settingsMadhab => 'حساب العصر (المذهب)';
+
+  @override
+  String get settingsMadhabShafi => 'الشافعي / المالكي / الحنبلي';
+
+  @override
+  String get settingsMadhabHanafi => 'الحنفي';
+
+  @override
+  String get onboardingChooseLanguageTitle => 'اختر لغتك';
+
+  @override
+  String get onboardingChooseLanguageSubtitle => 'Choose your language';
+
+  @override
+  String get onboardingNext => 'التالي';
+
+  @override
+  String get onboardingPermissionTitle => 'تفعيل الموقع';
+
+  @override
+  String get onboardingPermissionBody =>
+      'يستخدم دليل المسلم موقعك لعرض مواقيت صلاة دقيقة وتحديد اتجاه القبلة. يمكنك تغيير ذلك لاحقاً من إعدادات جهازك.';
+
+  @override
+  String get onboardingAllowLocation => 'السماح بالوصول للموقع';
+
+  @override
+  String get onboardingSkip => 'ليس الآن';
+
+  @override
+  String get onboardingGetStarted => 'ابدأ الآن';
 }
