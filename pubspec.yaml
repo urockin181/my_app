@@ -32,8 +32,12 @@ dependencies:
   adhan_dart: ^2.0.1
 
   # Compass sensor for Qibla direction (bearing itself is computed with
-  # adhan_dart's pure-Dart Qibla.qibla() - no native code, no build issues)
-  flutter_compass_v2: ^1.0.3
+  # adhan_dart's pure-Dart Qibla.qibla() - no native code, no build issues).
+  # Note: flutter_compass_v2 was tried first but its published AAR has
+  # compileSdk hardcoded to 33, incompatible with its own androidx
+  # dependencies (need 34+) - a bug in that package we can't fix from here.
+  # flutter_compass (the original, non-forked package) compiles against 34.
+  flutter_compass: ^0.8.1
 
   # Gemini free-tier LLM for the chatbot's natural language layer
   google_generative_ai: ^0.4.6

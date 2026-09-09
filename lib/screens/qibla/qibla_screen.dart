@@ -3,7 +3,7 @@ import 'dart:math' show pi, sin, cos;
 
 import 'package:adhan_dart/adhan_dart.dart' show Coordinates, Qibla;
 import 'package:flutter/material.dart';
-import 'package:flutter_compass_v2/flutter_compass_v2.dart';
+import 'package:flutter_compass/flutter_compass.dart';
 
 import '../../l10n/generated/app_localizations.dart';
 import '../../services/location_service.dart';
