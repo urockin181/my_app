@@ -80,7 +80,12 @@ class _ChatScreenState extends State<ChatScreen> {
       final answer = await _geminiService.answer(question, languageCode: languageCode);
       final text = answer.text.isEmpty ? l10n.chatNoInformation : answer.text;
       setState(() {
-        _messages.add(ChatMessage(sender: ChatSender.assistant, text: text));
+        _messages.add(ChatMessage(
+          sender: ChatSender.assistant,
+          text: text,
+          quranSources: answer.quranSources,
+          hadithSources: answer.hadithSources,
+        ));
       });
     } catch (e, stackTrace) {
       debugPrint('Chat error: $e\n$stackTrace');

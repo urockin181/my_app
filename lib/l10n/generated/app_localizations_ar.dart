@@ -75,6 +75,20 @@ class AppLocalizationsAr extends AppLocalizations {
       'لم يتم إعداد المحادثة الذكية بعد. يرجى إضافة مفتاح Gemini API لاستخدام هذه الميزة.';
 
   @override
+  String chatSourcesTitle(String count) {
+    return 'المصادر ($count)';
+  }
+
+  @override
+  String get chatSourcesVerifyNote =>
+      'هذا هو النص الدقيق كما ورد من المصدر دون أي تعديل - يرجى التحقق منه مباشرة في المسائل المهمة.';
+
+  @override
+  String chatHadithGradeLabel(String grade) {
+    return 'الدرجة: $grade';
+  }
+
+  @override
   String get prayerTimesTitle => 'مواقيت الصلاة';
 
   @override

@@ -75,6 +75,20 @@ class AppLocalizationsEn extends AppLocalizations {
       'The chatbot is not configured yet. Please add a Gemini API key to use this feature.';
 
   @override
+  String chatSourcesTitle(String count) {
+    return 'Sources ($count)';
+  }
+
+  @override
+  String get chatSourcesVerifyNote =>
+      'This is the exact text retrieved from the source, unedited - please verify important matters directly against it.';
+
+  @override
+  String chatHadithGradeLabel(String grade) {
+    return 'Grade: $grade';
+  }
+
+  @override
   String get prayerTimesTitle => 'Prayer Times';
 
   @override

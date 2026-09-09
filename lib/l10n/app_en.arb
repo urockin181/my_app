@@ -24,6 +24,19 @@
   "chatHadithGradeDaif": "Weak (Da'if)",
   "chatHadithGradeUnknown": "Grade not available",
   "chatApiKeyMissing": "The chatbot is not configured yet. Please add a Gemini API key to use this feature.",
+  "chatSourcesTitle": "Sources ({count})",
+  "@chatSourcesTitle": {
+    "placeholders": {
+      "count": {"type": "String"}
+    }
+  },
+  "chatSourcesVerifyNote": "This is the exact text retrieved from the source, unedited - please verify important matters directly against it.",
+  "chatHadithGradeLabel": "Grade: {grade}",
+  "@chatHadithGradeLabel": {
+    "placeholders": {
+      "grade": {"type": "String"}
+    }
+  },
 
   "prayerTimesTitle": "Prayer Times",
   "prayerFajr": "Fajr",

@@ -10,10 +10,20 @@ class ChatbotAnswer {
   const ChatbotAnswer({
     required this.text,
     required this.hasSources,
+    required this.quranSources,
+    required this.hadithSources,
   });
 
   final String text;
   final bool hasSources;
+
+  /// The raw, unmodified verses/hadith actually used to ground this answer
+  /// - straight from the API, never touched by the model - so the app can
+  /// show them verbatim alongside Gemini's prose for independent
+  /// verification, since Quran accuracy must never depend solely on an
+  /// LLM's ability to quote correctly.
+  final List<QuranVerse> quranSources;
+  final List<HadithResult> hadithSources;
 }
 
 /// Orchestrates the chatbot: retrieves real Quran/Hadith text (see
@@ -125,7 +135,12 @@ Question: $question
     final response = await _generateWithRetry(prompt);
     final text = response.text?.trim() ?? '';
 
-    return ChatbotAnswer(text: text, hasSources: hasSources);
+    return ChatbotAnswer(
+      text: text,
+      hasSources: hasSources,
+      quranSources: quranResults,
+      hadithSources: hadithResults,
+    );
   }
 
   String _buildContext(List<QuranVerse> quran, List<HadithResult> hadith) {
@@ -169,16 +184,21 @@ Rules:
 1. If SOURCES contains material that actually answers the question, write a
    clear, respectful answer in $languageName, and explicitly cite what you
    used (Surah name and verse number, or Hadith collection and number).
-2. If any Hadith you cite has a Grade listed, state that grade in the
+2. Quran accuracy is absolutely critical. When quoting Quran text, copy the
+   Arabic exactly character-for-character from SOURCES - never paraphrase,
+   summarize, retranslate, or reconstruct a verse from memory, even
+   partially. If you are not fully certain a verse in SOURCES answers the
+   question, say so rather than stretching its meaning to fit.
+3. If any Hadith you cite has a Grade listed, state that grade in the
    answer (e.g. "this is graded Sahih/authentic" or "this is graded
    Da'if/weak"). If the grade says "not provided by source", say the
    grade is not available rather than guessing.
-3. If SOURCES does not contain anything that actually answers the
+4. If SOURCES does not contain anything that actually answers the
    question, reply in $languageName with a short, honest message saying
    you don't have information about this from the Quran or Hadith sources
    available to you, and suggest the user consult a qualified scholar. Do
    not make up an answer.
-4. Keep the tone warm, humble, and respectful of the religion. Never issue
+5. Keep the tone warm, humble, and respectful of the religion. Never issue
    personal religious rulings (fatwas) - only relay what the sources say.
 
 SOURCES:

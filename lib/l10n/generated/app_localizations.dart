@@ -218,6 +218,24 @@ abstract class AppLocalizations {
   /// **'The chatbot is not configured yet. Please add a Gemini API key to use this feature.'**
   String get chatApiKeyMissing;
 
+  /// No description provided for @chatSourcesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sources ({count})'**
+  String chatSourcesTitle(String count);
+
+  /// No description provided for @chatSourcesVerifyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'This is the exact text retrieved from the source, unedited - please verify important matters directly against it.'**
+  String get chatSourcesVerifyNote;
+
+  /// No description provided for @chatHadithGradeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Grade: {grade}'**
+  String chatHadithGradeLabel(String grade);
+
   /// No description provided for @prayerTimesTitle.
   ///
   /// In en, this message translates to:

@@ -23,6 +23,19 @@
   "chatHadithGradeDaif": "ضعيف",
   "chatHadithGradeUnknown": "الدرجة غير متوفرة",
   "chatApiKeyMissing": "لم يتم إعداد المحادثة الذكية بعد. يرجى إضافة مفتاح Gemini API لاستخدام هذه الميزة.",
+  "chatSourcesTitle": "المصادر ({count})",
+  "@chatSourcesTitle": {
+    "placeholders": {
+      "count": {"type": "String"}
+    }
+  },
+  "chatSourcesVerifyNote": "هذا هو النص الدقيق كما ورد من المصدر دون أي تعديل - يرجى التحقق منه مباشرة في المسائل المهمة.",
+  "chatHadithGradeLabel": "الدرجة: {grade}",
+  "@chatHadithGradeLabel": {
+    "placeholders": {
+      "grade": {"type": "String"}
+    }
+  },
 
   "prayerTimesTitle": "مواقيت الصلاة",
   "prayerFajr": "الفجر",
